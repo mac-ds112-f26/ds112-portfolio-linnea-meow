@@ -6,7 +6,7 @@
     "section": "",
     "text": "Welcome to my online portfolio for COMP/STAT112 course taken at Macalester College. Please, use the side bar on the left for navigation.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hi</span>"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "href": "pvj/pvj-01.html",
     "title": "Personal Visualization Journey",
     "section": "",
-    "text": "Add content here",
+    "text": "Hi !!! plot(img)",
     "crumbs": [
       "Personal Viz Journey",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Personal Visualization Journey</span>"
