@@ -1,0 +1,126 @@
+---
+title: "My first Quarto document"
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+## Intro
+
+**Macalester College** is in the *Twin Cities*.
+It has:
+
+- four seasons
+- bagpipes
+- delightful students
+
+Check it out for yourself:
+
+![](https://www.macalester.edu/about/wp-content/uploads/sites/191/2019/12/campusmap336.png)
+
+## Exercise 1: Deduce Quarto features
+
+Check out the appearance and contents of this document.
+Thoughts?
+
+In the toolbar at the top of this document, **Render** the .qmd file into a .html file.
+Where is this file stored?
+Thoughts about its appearance / contents?
+Can you edit it?
+
+The file is stored in /docs/ica rather than just /ica.
+The appearance is way busier - lots of \< \> and {} .
+I can edit it.
+
+Toggling between the .qmd and .html files, explain the purpose of the following features in the .qmd file:
+
+`*` - italics *hi*
+
+`**` - bold **hi**
+
+`#` - big text
+
+# hi
+
+`-` - bullet point
+
+- hi
+
+`\` - hidden?
+
+\hi
+
+`![](url)`
+
+[hi](https://www.youtube.com/)
+
+...
+doesn't seem to do much in the html
+
+## Exercise 2: Code
+
+How does this appear in the .qmd?
+The .html?
+So...?!
+
+seq(from = 100, to = 1000, by = 50)
+
+it's not working as a function in the console
+
+## Exercise 3: Chunks
+
+Quarto isn't a mind reader -- we must distinguish R code from text.
+We do so by putting code inside an **R chunk**:
+
+```{r}
+{seq(from = 100, to = 1000, by = 50)}
+```
+
+- Put the `seq()` code in the chunk.
+- Press the green arrow in the top right of the chunk. What happens in the qmd?
+- Render. What appears in the html: R code, output, or both?
+
+R code product listed in all cases
+
+## Exercise 4: Practice
+
+- Use R code to create the following sequence: 10 10 10 10
+- Store the sequence as `four_tens`.
+- Use an R function (which we haven't learned!) to add up the numbers in `four_tens`.
+
+```{r}
+four_tens <- {rep(10, 4)}
+{sum(four_tens)}
+``` 
+
+## Exercise 5: Fix this code
+
+Code is a form of communication, and the code below doesn't cut it.
+
+Put the code in a chunk and fix it.
+
+```{r}
+{rep(seq(from = 100, to = 1000, length = 20), 10)}
+{theNumberofStudentsinthisclass <- 27}
+```
+
+## Exercise 6: Comments
+
+Run the chunk below.
+Notice that R ignores anything in a line starting with a pound sign (`#`).
+If we took the `#` away we'd get an error!
+
+```{r}
+# This is a comment
+4 + 5
+```
+
+We'll utilize this feature to **comment our code**, i.e. leave short notes about what our code is doing.
+Below, replace the `???` with an appropriate comment.
+
+```{r}
+# temperature conversion from celsius to fahrenheit
+temperature_c <- 10
+temperature_f <- temperature_c * 9/5 + 32
+temperature_f
+```

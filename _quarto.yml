@@ -22,10 +22,10 @@ number-depth: 2
 
 book:
   title: "COMP/STAT212 Portfolio"
-  author: "Your Name Here"
+  author: "Linnea Joanen"
   date: today  # use today to update date published based on last time project was edited
   date-format: full
-  # favicon: path/to/favorite-logo.png
+  # favicon: C:/Users/linne/OneDrive/Desktop/mew.png
   reader-mode: true
   # site-url: https://site-url
   page-navigation: true
@@ -45,9 +45,9 @@ book:
       # footer text
 
   sidebar:
-    title: "Your Name Here"
-    logo: assets/sidebar-logo.png
-    logo-alt: "Random negative space illustration"
+    title: "Linnea Joanen"
+    logo: "!(images/mew.png)"
+    logo-alt: "my learning"
     collapse-level: 2
     style: "docked"
     pinned: true
@@ -57,8 +57,12 @@ book:
     #     href: "https://link-to-tool"
 
   chapters:
-    - text: "Welcome"
+    - text: "Hi"
       href: index.qmd
+
+    - part: "Quarto Demo"
+      chapters:
+      - ica/quarto-demo.qmd
 
     - part: "Personal Viz Journey"
       chapters:
@@ -75,8 +79,7 @@ book:
 
     - part: "In-Class Activities"
       chapters:
-      - ica/ica-sample1.qmd
-      - ica/ica-sample2.qmd
+      - 03-univariate-viz-exercises.qmd
 
     - part: "Extras"
       chapters:
