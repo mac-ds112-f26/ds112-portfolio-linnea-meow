@@ -10,6 +10,94 @@
     ]
   },
   {
+    "objectID": "ica/quarto-demo.html",
+    "href": "ica/quarto-demo.html",
+    "title": "My first Quarto document",
+    "section": "",
+    "text": "Intro\nMacalester College is in the Twin Cities. It has:\nCheck it out for yourself:",
+    "crumbs": [
+      "Quarto Demo",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>My first Quarto document</span>"
+    ]
+  },
+  {
+    "objectID": "ica/quarto-demo.html#intro",
+    "href": "ica/quarto-demo.html#intro",
+    "title": "My first Quarto document",
+    "section": "",
+    "text": "four seasons\nbagpipes\ndelightful students",
+    "crumbs": [
+      "Quarto Demo",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>My first Quarto document</span>"
+    ]
+  },
+  {
+    "objectID": "ica/quarto-demo.html#exercise-1-deduce-quarto-features",
+    "href": "ica/quarto-demo.html#exercise-1-deduce-quarto-features",
+    "title": "My first Quarto document",
+    "section": "Exercise 1: Deduce Quarto features",
+    "text": "Exercise 1: Deduce Quarto features\nCheck out the appearance and contents of this document. Thoughts?\nIn the toolbar at the top of this document, Render the .qmd file into a .html file. Where is this file stored? Thoughts about its appearance / contents? Can you edit it?\nThe file is stored in /docs/ica rather than just /ica. The appearance is way busier - lots of &lt; &gt; and {} . I can edit it.\nToggling between the .qmd and .html files, explain the purpose of the following features in the .qmd file:\n* - italics hi\n** - bold hi\n# - big text",
+    "crumbs": [
+      "Quarto Demo",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>My first Quarto document</span>"
+    ]
+  },
+  {
+    "objectID": "ica/quarto-demo.html#exercise-2-code",
+    "href": "ica/quarto-demo.html#exercise-2-code",
+    "title": "My first Quarto document",
+    "section": "Exercise 2: Code",
+    "text": "Exercise 2: Code\nHow does this appear in the .qmd? The .html? So…?!\nseq(from = 100, to = 1000, by = 50)\nit’s not working as a function in the console",
+    "crumbs": [
+      "Quarto Demo",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>My first Quarto document</span>"
+    ]
+  },
+  {
+    "objectID": "ica/quarto-demo.html#exercise-3-chunks",
+    "href": "ica/quarto-demo.html#exercise-3-chunks",
+    "title": "My first Quarto document",
+    "section": "Exercise 3: Chunks",
+    "text": "Exercise 3: Chunks\nQuarto isn’t a mind reader – we must distinguish R code from text. We do so by putting code inside an R chunk:\n\nCode{seq(from = 100, to = 1000, by = 50)}\n\n [1]  100  150  200  250  300  350  400  450  500  550  600  650  700  750  800\n[16]  850  900  950 1000\n\n\n\nPut the seq() code in the chunk.\nPress the green arrow in the top right of the chunk. What happens in the qmd?\nRender. What appears in the html: R code, output, or both?\n\nR code product listed in all cases",
+    "crumbs": [
+      "Quarto Demo",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>My first Quarto document</span>"
+    ]
+  },
+  {
+    "objectID": "ica/quarto-demo.html#exercise-4-practice",
+    "href": "ica/quarto-demo.html#exercise-4-practice",
+    "title": "My first Quarto document",
+    "section": "Exercise 4: Practice",
+    "text": "Exercise 4: Practice\n\nUse R code to create the following sequence: 10 10 10 10\nStore the sequence as four_tens.\nUse an R function (which we haven’t learned!) to add up the numbers in four_tens.\n\n\nCodefour_tens &lt;- {rep(10, 4)}\n{sum(four_tens)}\n\n[1] 40",
+    "crumbs": [
+      "Quarto Demo",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>My first Quarto document</span>"
+    ]
+  },
+  {
+    "objectID": "ica/quarto-demo.html#exercise-5-fix-this-code",
+    "href": "ica/quarto-demo.html#exercise-5-fix-this-code",
+    "title": "My first Quarto document",
+    "section": "Exercise 5: Fix this code",
+    "text": "Exercise 5: Fix this code\nCode is a form of communication, and the code below doesn’t cut it.\nPut the code in a chunk and fix it.\n\nCode{rep(seq(from = 100, to = 1000, length = 20), 10)}\n\n  [1]  100.0000  147.3684  194.7368  242.1053  289.4737  336.8421  384.2105\n  [8]  431.5789  478.9474  526.3158  573.6842  621.0526  668.4211  715.7895\n [15]  763.1579  810.5263  857.8947  905.2632  952.6316 1000.0000  100.0000\n [22]  147.3684  194.7368  242.1053  289.4737  336.8421  384.2105  431.5789\n [29]  478.9474  526.3158  573.6842  621.0526  668.4211  715.7895  763.1579\n [36]  810.5263  857.8947  905.2632  952.6316 1000.0000  100.0000  147.3684\n [43]  194.7368  242.1053  289.4737  336.8421  384.2105  431.5789  478.9474\n [50]  526.3158  573.6842  621.0526  668.4211  715.7895  763.1579  810.5263\n [57]  857.8947  905.2632  952.6316 1000.0000  100.0000  147.3684  194.7368\n [64]  242.1053  289.4737  336.8421  384.2105  431.5789  478.9474  526.3158\n [71]  573.6842  621.0526  668.4211  715.7895  763.1579  810.5263  857.8947\n [78]  905.2632  952.6316 1000.0000  100.0000  147.3684  194.7368  242.1053\n [85]  289.4737  336.8421  384.2105  431.5789  478.9474  526.3158  573.6842\n [92]  621.0526  668.4211  715.7895  763.1579  810.5263  857.8947  905.2632\n [99]  952.6316 1000.0000  100.0000  147.3684  194.7368  242.1053  289.4737\n[106]  336.8421  384.2105  431.5789  478.9474  526.3158  573.6842  621.0526\n[113]  668.4211  715.7895  763.1579  810.5263  857.8947  905.2632  952.6316\n[120] 1000.0000  100.0000  147.3684  194.7368  242.1053  289.4737  336.8421\n[127]  384.2105  431.5789  478.9474  526.3158  573.6842  621.0526  668.4211\n[134]  715.7895  763.1579  810.5263  857.8947  905.2632  952.6316 1000.0000\n[141]  100.0000  147.3684  194.7368  242.1053  289.4737  336.8421  384.2105\n[148]  431.5789  478.9474  526.3158  573.6842  621.0526  668.4211  715.7895\n[155]  763.1579  810.5263  857.8947  905.2632  952.6316 1000.0000  100.0000\n[162]  147.3684  194.7368  242.1053  289.4737  336.8421  384.2105  431.5789\n[169]  478.9474  526.3158  573.6842  621.0526  668.4211  715.7895  763.1579\n[176]  810.5263  857.8947  905.2632  952.6316 1000.0000  100.0000  147.3684\n[183]  194.7368  242.1053  289.4737  336.8421  384.2105  431.5789  478.9474\n[190]  526.3158  573.6842  621.0526  668.4211  715.7895  763.1579  810.5263\n[197]  857.8947  905.2632  952.6316 1000.0000\n\nCode{theNumberofStudentsinthisclass &lt;- 27}",
+    "crumbs": [
+      "Quarto Demo",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>My first Quarto document</span>"
+    ]
+  },
+  {
+    "objectID": "ica/quarto-demo.html#exercise-6-comments",
+    "href": "ica/quarto-demo.html#exercise-6-comments",
+    "title": "My first Quarto document",
+    "section": "Exercise 6: Comments",
+    "text": "Exercise 6: Comments\nRun the chunk below. Notice that R ignores anything in a line starting with a pound sign (#). If we took the # away we’d get an error!\n\nCode# This is a comment\n4 + 5\n\n[1] 9\n\n\nWe’ll utilize this feature to comment our code, i.e. leave short notes about what our code is doing. Below, replace the ??? with an appropriate comment.\n\nCode# temperature conversion from celsius to fahrenheit\ntemperature_c &lt;- 10\ntemperature_f &lt;- temperature_c * 9/5 + 32\ntemperature_f\n\n[1] 50",
+    "crumbs": [
+      "Quarto Demo",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>My first Quarto document</span>"
+    ]
+  },
+  {
     "objectID": "pvj/pvj-01.html",
     "href": "pvj/pvj-01.html",
     "title": "Personal Visualization Journey",
@@ -17,7 +105,7 @@
     "text": "Hi !!!",
     "crumbs": [
       "Personal Viz Journey",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Personal Visualization Journey</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Personal Visualization Journey</span>"
     ]
   },
   {
@@ -28,7 +116,7 @@
     "text": "Add content here",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>TidyTuesday Sample 1</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>TidyTuesday Sample 1</span>"
     ]
   },
   {
@@ -39,7 +127,7 @@
     "text": "Add content here",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>TidyTuesday Sample 2</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>TidyTuesday Sample 2</span>"
     ]
   },
   {
@@ -50,7 +138,7 @@
     "text": "R",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -61,29 +149,172 @@
     "text": "Quarto\n\n\n\nfrom qmd4sci.njtierney.com",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
-    "objectID": "ica/ica-sample1.html",
-    "href": "ica/ica-sample1.html",
-    "title": "ICA Sample 1",
+    "objectID": "ica/03-univariate-viz-exercises.html",
+    "href": "ica/03-univariate-viz-exercises.html",
+    "title": "Univariate Viz — Exercises",
     "section": "",
-    "text": "Add content here",
+    "text": "Setup\nLoad the data first.\nCodelibrary(tidyverse)\nCode# Import data\nhikes &lt;- read.csv(\"https://mac-stat.github.io/data/high_peaks.csv\")",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ICA Sample 1</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
     ]
   },
   {
-    "objectID": "ica/ica-sample2.html",
-    "href": "ica/ica-sample2.html",
-    "title": "ICA Sample 2",
-    "section": "",
-    "text": "Add content here",
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-1-research-questions",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-1-research-questions",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 1: Research Questions",
+    "text": "Exercise 1: Research Questions\nLet’s dig into the hikes data, starting with the elevation and difficulty ratings of the hikes:\n\nCodehead(hikes)\n\n             peak elevation difficulty ascent length time    rating\n1     Mt. Marcy        5344          5   3166   14.8 10.0  moderate\n2 Algonquin Peak       5114          5   2936    9.6  9.0  moderate\n3   Mt. Haystack       4960          7   3570   17.8 12.0 difficult\n4   Mt. Skylight       4926          7   4265   17.9 15.0 difficult\n5 Whiteface Mtn.       4867          4   2535   10.4  8.5      easy\n6       Dix Mtn.       4857          5   2800   13.2 10.0  moderate\n\n\n\nWhat features would we like a visualization of the categorical difficulty rating variable to capture?\nWhat about a visualization of the quantitative elevation variable?",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ICA Sample 2</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-2-load-tidyverse",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-2-load-tidyverse",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 2: Load tidyverse",
+    "text": "Exercise 2: Load tidyverse\nWe’ll address the above questions using ggplot tools. Try running the following chunk and simply take note of the error message – this is one you’ll get a lot!\n\nCode# Use the ggplot function\nggplot(hikes, aes(x = rating))\n\n\n\n\n\n\n\nIn order to use ggplot tools, we have to first load the tidyverse package in which they live. We’ve installed the package but we need to tell R when we want to use it. Run the chunk below to load the library. You’ll need to do this within any .qmd file that uses ggplot().\n\nCode# Load the package\nlibrary(tidyverse)",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-3-bar-chart-of-ratings---part-1",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-3-bar-chart-of-ratings---part-1",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 3: Bar Chart of Ratings - Part 1",
+    "text": "Exercise 3: Bar Chart of Ratings - Part 1\nConsider some specific research questions about the difficulty rating of the hikes:\n\nHow many hikes fall into each category?\nAre the hikes evenly distributed among these categories, or are some more common than others?\n\nAll of these questions can be answered with: (1) a bar chart; of (2) the categorical data recorded in the rating column. First, set up the plotting frame:\n\nCodeggplot(hikes, aes(x = rating))\n\n\n\n\n\n\n\nThink about:\n\nWhat did this do? What do you observe?\nWhat, in general, is the first argument of the ggplot() function?\nWhat is the purpose of writing x = rating?\nWhat do you think aes stands for?!?",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-4-bar-chart-of-ratings---part-2",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-4-bar-chart-of-ratings---part-2",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 4: Bar Chart of Ratings - Part 2",
+    "text": "Exercise 4: Bar Chart of Ratings - Part 2\nNow let’s add a geometric layer to the frame / canvas, and start customizing the plot’s theme. To this end, try each chunk below, one by one. In each chunk, make a comment about how both the code and the corresponding plot both changed.\nNOTE:\n\nPay attention to the general code properties and structure, not memorization.\nNot all of these are “good” plots. We’re just exploring ggplot.\n\n\nCode# adding graph type - geometric bar\nggplot(hikes, aes(x = rating)) +\n  geom_bar()\n\n\n\n\n\n\n\n\nCode# naming both axes \nggplot(hikes, aes(x = rating)) +\n  geom_bar() +\n  labs(x = \"Rating\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\nCode# fill color blue\nggplot(hikes, aes(x = rating)) +\n  geom_bar(fill = \"blue\") +\n  labs(x = \"Rating\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\nCode# border color orange\nggplot(hikes, aes(x = rating)) +\n  geom_bar(color = \"orange\", fill = \"blue\") +\n  labs(x = \"Rating\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\nCode# add minimal style\nggplot(hikes, aes(x = rating)) +\n  geom_bar(color = \"orange\", fill = \"blue\")  +\n  labs(x = \"Rating\", y = \"Number of hikes\") +\n  theme_minimal()",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-5-bar-chart-follow-up",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-5-bar-chart-follow-up",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 5: Bar Chart Follow-up",
+    "text": "Exercise 5: Bar Chart Follow-up\nPart a\nReflect on the ggplot() code.\n\nWhat’s the purpose of the +? When do we use it? # “and”\nWe added the bars using geom_bar()? Why “geom”? # the visualization uses geometric shapes\nWhat does labs() stand for? # text labels\nWhat’s the difference between color and fill? # color is the border color; fill is the interior color\nPart b\nIn general, bar charts allow us to examine the following properties of a categorical variable:\n\nobserved categories: What categories did we observe? # easy, moderate, difficult\nvariability between categories: Are observations evenly spread out among the categories, or are some categories more common than others? #moderate is most common, then easy, then difficult\n\nWe must then translate this information into the context of our analysis, here hikes in the Adirondacks. Summarize below what you learned from the bar chart, in context. #Most hikes in the Adirondacks are of moderate difficulty. About a quarter of the hikes are easy, and a few hikes are difficult.\nPart c\nIs there anything you don’t like about this barplot? For example: check out the x-axis again.\n#The scale of difficulty is not arranged from least to most difficult but is instead arranged from the number of hikes within each category. I also think it should be easier to see the numbers on the y-axis. I also don’t like that “difficulty” is not specified, only “rating,” and the rating scale is also left unspecified.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-6-sad-bar-chart",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-6-sad-bar-chart",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 6: Sad Bar Chart",
+    "text": "Exercise 6: Sad Bar Chart\nLet’s now consider some research questions related to the quantitative elevation variable:\n\nAmong the hikes, what’s the range of elevation and how are the hikes distributed within this range (eg, evenly, in clumps, “normally”)? #3820 to 5344; even distribution\nWhat’s a typical elevation? #about 4000\nAre there any outliers, ie, hikes that have unusually high or low elevations? #not really; 5344 is slightly high\n\nHere:\n\nConstruct a bar chart of the quantitative elevation variable.\nExplain why this might not be an effective visualization for this and other quantitative variables. (What questions does / doesn’t it help answer?)\n\n\nCode#elevation distribution\nggplot(hikes, aes(x = elevation)) +\n  geom_bar(color = \"green\", fill = \"pink\")  +\n  labs(x = \"Elevation\", y = \"Distribution\") +\n  theme_minimal()\n\n\n\n\n\n\n\n#This is not helpful for visualizing the distribution of various elevations among the peaks.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-7-a-histogram-of-elevation",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-7-a-histogram-of-elevation",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 7: A Histogram of Elevation",
+    "text": "Exercise 7: A Histogram of Elevation\nQuantitative variables require different viz than categorical variables. Especially when there are many possible outcomes of the quantitative variable. It’s typically insufficient to simply count up the number of times we’ve observed a particular outcome as the bar graph did above. It gives us a sense of ranges and typical outcomes, but not a good sense of how the observations are distributed across this range. We’ll explore two methods for graphing quantitative variables: histograms and density plots.\nHistograms are constructed by (1) dividing up the observed range of the variable into ‘bins’ of equal width; and (2) counting up the number of cases that fall into each bin. Check out the example below:\n\nPart a\nLet’s dig into some details.\n\nHow many hikes have an elevation between 4500 and 4700 feet? #6 hikes\nHow many total hikes have an elevation of at least 5100 feet? #2 hikes\nPart b\nNow the bigger picture. In general, histograms allow us to examine the following properties of a quantitative variable:\n\ntypical outcome: Where’s the center of the data points? What’s typical? Unique 42 Min 3,820 Max 5,344 Mean 4405.3 &lt;– typical Median 4380.5 &lt;– center SD 358.3\nvariability & range: How spread out are the outcomes? What are the max and min outcomes?\n\nrange: 3820 - 5344\n\n\nshape: How are values distributed along the observed range? Is the distribution symmetric, right-skewed, left-skewed, bi-modal, or uniform (flat)?\n\nleft-skewed\n\n\noutliers: Are there any outliers, ie, outcomes that are unusually large/small?\n\nthe tallest peaks are slight outliers\nWe must then translate this information into the context of our analysis, here hikes in the Adirondacks. Addressing each of the features in the above list, summarize below what you learned from the histogram, in context.\nThe hikes generally peak within the elevation range of 4000-5000ft, with a slight skew toward the 4000 end of the range.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-8-building-histograms---part-1",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-8-building-histograms---part-1",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 8: Building Histograms - Part 1",
+    "text": "Exercise 8: Building Histograms - Part 1\n2-MINUTE CHALLENGE: Thinking of the bar chart code, try to intuit what line you can tack on to the below frame of elevation to add a histogram layer. Don’t forget a +. If it doesn’t come to you within 2 minutes, no problem – all will be revealed in the next exercise.\n\nCodeggplot(hikes, aes(x = elevation)) + \n  geom_histogram()",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-9-building-histograms---part-2",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-9-building-histograms---part-2",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 9: Building Histograms - Part 2",
+    "text": "Exercise 9: Building Histograms - Part 2\nLet’s build some histograms. Try each chunk below, one by one. In each chunk, make a comment about how both the code and the corresponding plot both changed.\n\nCode# geometric histogram viz using elevation as x-axis\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram()\n\n\n\n\n\n\n\n\nCode# white border\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\") \n\n\n\n\n\n\n\n\nCode# fill color blue\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", fill = \"blue\") \n\n\n\n\n\n\n\n\nCode# naming the axes\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\") +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\nCode# set binwidth to elevation of 1000 (variables lumped together if within same range of 1000's place)\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", binwidth = 1000) +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\nCode# same but separated if difference between x datapoints exceeds 5\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", binwidth = 5) +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\nCode# same but range of 200\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", binwidth = 200) +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-10-histogram-follow-up",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-10-histogram-follow-up",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 10: Histogram Follow-up",
+    "text": "Exercise 10: Histogram Follow-up\n\nWhat function added the histogram layer / geometry? geom_histogram\nWhat’s the difference between color and fill? color - border fill - fill\nWhy does adding color = \"white\" improve the visualization? shows each bar as distinct; makes it easier to read x-axis values\nWhat did binwidth do? changed the range in which datapoints are lumped together\nWhy does the histogram become ineffective if the binwidth is too big (eg, 1000 feet)? the complexity within the data is flattened\nWhy does the histogram become ineffective if the binwidth is too small (eg, 5 feet)? the trends within the data are lost due to every single data point being represented independently of one another",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-11-density-plots",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-11-density-plots",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 11: Density Plots",
+    "text": "Exercise 11: Density Plots\nDensity plots are essentially smooth versions of the histogram. Instead of sorting observations into discrete bins, the “density” of observations is calculated across the entire range of outcomes. The greater the number of observations, the greater the density! The density is then scaled so that the area under the density curve always equals 1 and the area under any fraction of the curve represents the fraction of cases that lie in that range.\nCheck out a density plot of elevation. Notice that the y-axis (density) has no contextual interpretation – it’s a relative measure. The higher the density, the more common are elevations in that range.\n\nCodeggplot(hikes, aes(x = elevation)) +\n  geom_density()\n\n\n\n\n\n\n\nQuestions\n\n\nINTUITION CHECK: Before tweaking the code and thinking back to geom_bar() and geom_histogram(), how do you anticipate the following code will change the plot?\n\ngeom_density(color = \"blue\")\ngeom_density(fill = \"orange\")\n\n\nTRY IT! Test out those lines in the chunk below. Was your intuition correct?\n\n\nCodeggplot(hikes, aes(x = elevation)) +\n  geom_density(color = \"blue\" , fill = \"orange\")\n\n\n\n\n\n\n\n\nExamine the density plot. How does it compare to the histogram? What does it tell you about the typical elevation, variability / range in elevations, and shape of the distribution of elevations within this range?\n\nit more clearly represents the left-skew of the data and the atypicality of the higher-elevation peaks",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-12-density-plots-vs-histograms",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-12-density-plots-vs-histograms",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 12: Density Plots vs Histograms",
+    "text": "Exercise 12: Density Plots vs Histograms\nThe histogram and density plot both allow us to visualize the behavior of a quantitative variable: typical outcome, variability / range, shape, and outliers. What are the pros/cons of each? What do you like/not like about each?\nthe density plot is nice for visualizing the data points’ distribution, but the y-axis is harder to read. sheer prevalence and binwidth alterations make it easier to understand the nature of the data in histograms, but the binwidth choice can definitely skew the data. it’s harder to see the significance of outliers on histograms than on density plots.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-13-code-communication",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-13-code-communication",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 13: Code = communication",
+    "text": "Exercise 13: Code = communication\nWe obviously won’t be done until we talk about communication. All code above has a similar general structure (where the details can change):\n\nCodeggplot(___, aes(x = ___)) + \n  geom___(color = \"___\", fill = \"___\") + \n  labs(x = \"___\", y = \"___\")\n\n\n\nThough not necessary to the code working, it’s common, good practice to indent or tab the lines of code after the first line (counterexample below). Why?\n\nbecause it’s harder to tell that it’s all part of the same command in the chunk\n\nCode# YUCK\nggplot(hikes, aes(x = elevation)) +\ngeom_histogram(color = \"white\", binwidth = 200) +\nlabs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\n\n\nThough not necessary to the code working, it’s common, good practice to put a line break after each + (counterexample below). Why?\n\n\nCode# YUCK \nggplot(hikes, aes(x = elevation)) + geom_histogram(color = \"white\", binwidth = 200) + labs(x = \"Elevation (feet)\", y = \"Number of hikes\")",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
+    ]
+  },
+  {
+    "objectID": "ica/03-univariate-viz-exercises.html#exercise-14-practice",
+    "href": "ica/03-univariate-viz-exercises.html#exercise-14-practice",
+    "title": "Univariate Viz — Exercises",
+    "section": "Exercise 14: Practice",
+    "text": "Exercise 14: Practice\nPart a\nPractice your viz skills to learn about some of the variables in one of the following datasets:\n\nCode# World Cup data\nworld_cup &lt;- read.csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-29/worldcups.csv\")\n\n\nPart b\nCheck out the RStudio Data Visualization cheat sheet to learn more features of ggplot.\n\n\n\n\n\n\nWarningCheck → Commit → Push\n\n\n\nWhen done, don’t forgot to click Render Book and check the resulting HTML files. If happy, jump to GitHub Desktop and commit the changes with the message Finish uni viz and push to GitHub. Wait few seconds, then visit your portfolio website and make sure the changes are there.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz — Exercises</span>"
     ]
   },
   {
