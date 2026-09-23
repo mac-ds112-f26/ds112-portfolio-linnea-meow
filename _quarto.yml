@@ -80,7 +80,7 @@ book:
     - part: "In-Class Activities"
       chapters:
       - ica/03-univariate-viz-exercises.qmd
-      - ica/04-bivariate-viz-exercises.qmd
+      - ica/04-bivariate-viz.qmd
 
     - part: "Extras"
       chapters:
