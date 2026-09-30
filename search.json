@@ -329,6 +329,61 @@
     ]
   },
   {
+    "objectID": "ica/05-multivariate-viz.html",
+    "href": "ica/05-multivariate-viz.html",
+    "title": "Multivariate Viz",
+    "section": "",
+    "text": "SAT & Spending\nThough far from a perfect assessment of academic preparedness, SAT scores have historically been used as one measurement of a state’s education system. The education dataset contains various education variables for each state:\nCode# Import and check out data\neducation &lt;- read.csv(\"https://mac-stat.github.io/data/sat.csv\")\nhead(education)\n\n       State expend ratio salary frac verbal math  sat  fracCat\n1    Alabama  4.405  17.2 31.144    8    491  538 1029   (0,15]\n2     Alaska  8.963  17.6 47.951   47    445  489  934 (45,100]\n3    Arizona  4.778  19.3 32.175   27    448  496  944  (15,45]\n4   Arkansas  4.459  17.1 28.934    6    482  523 1005   (0,15]\n5 California  4.992  24.0 41.078   45    417  485  902  (15,45]\n6   Colorado  5.443  18.4 34.571   29    462  518  980  (15,45]\nA codebook is provided by Danny Kaplan who also made these data accessible:",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Multivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/05-multivariate-viz.html#sat-spending",
+    "href": "ica/05-multivariate-viz.html#sat-spending",
+    "title": "Multivariate Viz",
+    "section": "",
+    "text": "✏️ Plot SAT Scores\nConstruct a plot of how the average sat scores vary across states (HINT: you need to use the sat variable only).\nstr(education) -&gt; sat - integer; state - character (categorical)\n\nCodelibrary(tidyverse)\n\n\n\nCodeggplot(data = education, aes(x = sat)) +\n  geom_histogram()\n\n\n\n\n\n\nCodeggplot(data = education, aes(x = sat, group = State, fill = State)) +\n  geom_histogram(alpha = .6) \n\n\n\n\n\n\n\n✏️ Summarize SAT Distribution\nIt’s not a true bell curve; it has a skew towards 900. It seems that students most commonly score around a 900, a 940, or a 1025.\n✏️ Plot SAT vs Spending\nThe first question we’d like to answer is: Can the variability in sat scores from state to state be partially explained by how much a state spends on education, specifically its per pupil spending (expend) and typical teacher salary?\n\nCode# Construct a plot of sat vs expend\n# Include a \"best fit linear regression model\" (HINT: method = \"lm\")\nggplot(education, aes(y = sat, x = expend)) +\n  geom_point() +\n  geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n✏️ Plot SAT vs Salary\n\nCode# Construct a plot of sat vs salary\n# Include a \"best fit linear regression model\" (HINT: method = \"lm\")\nggplot(education, aes(y = sat, x = salary)) +\n  geom_point() +\n  geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n✏️ Describe Spending Trends\nWhat are the relationship trends between SAT scores and spending? Is there anything that surprises you?\nThere’s an inverse relationship between SAT scores and spending; the more spent per student and on teachers, the lower SAT scores are on average. However, this might be because of a lack of high-scoring results.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Multivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/05-multivariate-viz.html#trivariate-viz",
+    "href": "ica/05-multivariate-viz.html#trivariate-viz",
+    "title": "Multivariate Viz",
+    "section": "Trivariate Viz",
+    "text": "Trivariate Viz\n✏️ Combine Spending & Salaries\nConstruct one visualization of the relationship of sat with salary and expend. HINT: Start with just 2 variables and tweak that code to add the third variable. Try out a few things!\n\nCodeggplot(education, aes(y = sat, x = salary, color = expend)) +\n  geom_point() +\n    geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n✏️ Discretize Scale\nIt can be tough to distinguish color scales and size scales for quantitative variables. Another option is to discretize a quantitative variable, or basically cut it up into categories.\nConstruct the plot below. Check out the code and think about what’s happening here. What happens if you change “2” to “3”?\n\nCodeggplot(education, aes(y = sat, x = salary, color = cut(expend, 2))) + \n  geom_point() + \n  geom_smooth(se = FALSE, method = \"lm\")\n\n\n\n\n\n\n\n✏️ Describe Trivariate Relationship\nDescribe the trivariate relationship between sat, salary, and expend.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Multivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/05-multivariate-viz.html#simpsons-paradox",
+    "href": "ica/05-multivariate-viz.html#simpsons-paradox",
+    "title": "Multivariate Viz",
+    "section": "Simpson’s Paradox",
+    "text": "Simpson’s Paradox\nIt’s strange that SAT scores seem to decrease with spending. But we’re leaving out an important variable from our analysis: the fraction of a state’s students that actually take the SAT. The fracCat variable indicates this fraction: low (under 15% take the SAT), medium (15-45% take the SAT), and high (at least 45% take the SAT).\n✏️ Plot SAT Participation\nBuild a univariate viz of fracCat to better understand how many states fall into each category.\n\nCodeggplot(education, aes(x = fracCat, group = State)) +\n  geom_bar()\n\n\n\n\n\n\n\n✏️ Relate SAT to Participation\nBuild 2 bivariate visualizations that demonstrate the relationship between sat and fracCat. What story does your graphic tell and why does this make contextual sense?\n\nCodeggplot(education, aes(x = fracCat, y = sat)) +\n  geom_boxplot()\n\n\n\n\n\n\nCodeggplot(education, aes(x = fracCat, y = sat)) +\n  geom_violin()\n\n\n\n\n\n\n\n✏️ Add Participation to Spending Plot\nMake a trivariate visualization that demonstrates the relationship of sat with expend AND fracCat. Highlight the differences in fracCat groups through color AND unique trend lines. What story does your graphic tell?\nDoes it still seem that SAT scores decrease as spending increases?\n\nCodeeducation |&gt;\n  ggplot(aes(y = sat, x = expend, color = fracCat)) + \n  geom_point() + \n  geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n✏️ Explain Simpson’s Paradox\nPutting all of this together, explain this example of Simpson’s Paradox. That is, why did it appear that SAT scores decrease as spending increases even though the opposite is true?\nBy looking at just SAT scores and spending alone, without regard to the amount of people that actually take the test per state, the data is skewed and depicts a false inverse relationship between spending and SAT score. The more people take the test, the more normalized the results become; when a small percentage of students are taking the test, those are usually the most prepared students.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Multivariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/05-multivariate-viz.html#heat-maps-star-plots-optional",
+    "href": "ica/05-multivariate-viz.html#heat-maps-star-plots-optional",
+    "title": "Multivariate Viz",
+    "section": "Heat Maps & Star Plots (Optional)",
+    "text": "Heat Maps & Star Plots (Optional)\nAs usual, we’ve only just scratched the surface! There are lots of other data viz techniques for exploring multivariate relationships. Let’s start with a heat map.\n✏️ Build Heat Maps\nRun the chunks below. Check out the code, but don’t worry about every little detail! NOTES:\n\nThis is not part of the ggplot() grammar, making it a bit complicated.\nIf you’re curious about what a line in the plot does, comment it out (#) and check out what happens!\nIn the plot, for each state (row), each variable (column) is scaled to indicate whether the state has a relative high value (yellow), a relatively low value (purple), or something in between (blues/greens).\nYou can also play with the color scheme. Type ?cm.colors in the console to learn about various options.\nWe’ll improve the plot later, so don’t spend too much time trying to learn something from this plot.\n\n\nCode# Remove the \"State\" column and use it to label the rows\n# Then scale the variables\nplot_data &lt;- education |&gt; \n  column_to_rownames(\"State\") |&gt; \n  data.matrix() |&gt; \n  scale()\n\n# Load the gplots package needed for heatmaps\nlibrary(gplots)\n\n# Construct heatmap 1\nheatmap.2(plot_data,\n  dendrogram = \"none\",\n  Rowv = NA, \n  scale = \"column\",\n  keysize = 0.7, \n  density.info = \"none\",\n  col = hcl.colors(256), \n  margins = c(10, 20),\n  colsep = c(1:7), rowsep = (1:50), sepwidth = c(0.05, 0.05),\n  sepcolor = \"white\", trace = \"none\"\n)\n\n\n\nCode# Construct heatmap 2\nheatmap.2(plot_data,\n  dendrogram = \"none\",\n  Rowv = TRUE,             ### WE CHANGED THIS FROM NA TO TRUE\n  scale = \"column\",\n  keysize = 0.7, \n  density.info = \"none\",\n  col = hcl.colors(256), \n  margins = c(10, 20),\n  colsep = c(1:7), rowsep = (1:50), sepwidth = c(0.05, 0.05),\n  sepcolor = \"white\", trace = \"none\"\n)\n\n\n\nCode# Construct heatmap 3\nheatmap.2(plot_data,\n  dendrogram = \"row\",       ### WE CHANGED THIS FROM \"none\" TO \"row\"\n  Rowv = TRUE,            \n  scale = \"column\",\n  keysize = 0.7, \n  density.info = \"none\",\n  col = hcl.colors(256), \n  margins = c(10, 20),\n  colsep = c(1:7), rowsep = (1:50), sepwidth = c(0.05, 0.05),\n  sepcolor = \"white\", trace = \"none\"\n)\n\n\n✏️ Interpret Heat Maps\nIn the final two plots, the states (rows) are rearranged by similarity with respect to these education metrics. The final plot includes a dendrogram which further indicates clusters of similar states. In short, states that have a shorter path to connection are more similar than others.\nPutting this all together, what insight do you gain about the education trends across U.S. states? Which states are similar? In what ways are they similar? Are there any outliers with respect to 1 or more of the education metrics?\nGeographically similar states tend to be grouped together, i.e. New York + New Jersey, or Louisiana + Mississippi.\nNorth Dakota has the highest SAT score on average but the lowest expenditure. This is probably still due to Simpson’s Paradox, since fewer students take the SAT (5%) in North Dakota.\n✏️ Build Star Plot\nLike heat maps, star plots indicate the relative scale of each variable for each state. Thus, we can use star maps to identify similar groups of states, and unusual states!\nConstruct and check out the star plot below. Note that each state has a “pie”, with each segment corresponding to a different variable. The larger a segment, the larger that variable’s value is in that state. For example:\n\nCheck out Minnesota. How does Minnesota’s education metrics compare to those in other states? What metrics are relatively high? Relatively low?\n\nOnly 9% of students take the SAT in Minnesota. The spending is average, and the SAT average is #3 in the nation.\n\nWhat states appear to be similar? Do these observations agree with those that you gained from the heat map?\n\nNorth Dakota and South Dakota are the most similar. Illinois, Michigan, and Wisconsin appear more similar in the heat map according to the dendrogram, but it’s close.\n\nCodestars(plot_data,\n  flip.labels = FALSE,\n  key.loc = c(10, 1.5),\n  cex = 1, \n  draw.segments = TRUE\n)\n\n\n✏️ Map Star Plots\nFinally, let’s plot the state stars by geographic location! What new insight do you gain here?!\nHigh expenditure in the northeast and west regions; low expenditure in the Midwest and South.\n\nCodestars(plot_data,\n  flip.labels = FALSE,\n  locations = data.matrix(as.data.frame(state.center)),  # added external data to arrange by geo location\n  key.loc = c(-110, 28),\n  cex = 1, \n  draw.segments = TRUE\n)",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Multivariate Viz</span>"
+    ]
+  },
+  {
     "objectID": "extra/extra-sample1.html",
     "href": "extra/extra-sample1.html",
     "title": "Extra Sample 1",
@@ -336,7 +391,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Extra Sample 1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Extra Sample 1</span>"
     ]
   },
   {
@@ -347,7 +402,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Extra Sample 2</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Extra Sample 2</span>"
     ]
   }
 ]

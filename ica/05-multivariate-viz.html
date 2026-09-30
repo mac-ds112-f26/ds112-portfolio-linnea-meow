@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Multivariate Viz – COMP/STAT212 Portfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../extra/extra-sample1.html" rel="next">
+<link href="../ica/04-bivariate-viz.html" rel="prev">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-de8aaa27514dfd90d9ba9eb637b40272.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-5246efa9620190a983835250993f6ee0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-de8aaa27514dfd90d9ba9eb637b40272.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../style/custom.css">
+</head>
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ica/03-univariate-viz-exercises.html">In-Class Activities</a></li><li class="breadcrumb-item"><a href="../ica/05-multivariate-viz.html"><span class="chapter-title">Multivariate Viz</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../!(images/mew.png)" alt="my learning" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../!(images/mew.png)" alt="my learning" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Linnea Joanen</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Hi</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Quarto Demo</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/quarto-demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">My first Quarto document</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Personal Viz Journey</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pvj/pvj-01.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Personal Visualization Journey</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">TidyTuesday</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tt/2025-07-08.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">TidyTuesday Sample 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tt/2025-07-15.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">TidyTuesday Sample 2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pre-Class Learnings</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pcl/pcl.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pre-Class Learning Summaries</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">In-Class Activities</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/03-univariate-viz-exercises.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Univariate Viz — Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/04-bivariate-viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bivariate Viz - Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/05-multivariate-viz.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Multivariate Viz</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extras</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra/extra-sample1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra/extra-sample2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#sat-spending" id="toc-sat-spending" class="nav-link active" data-scroll-target="#sat-spending">SAT &amp; Spending</a>
+  <ul class="collapse">
+<li><a href="#plot-sat-scores" id="toc-plot-sat-scores" class="nav-link" data-scroll-target="#plot-sat-scores">✏️ Plot SAT Scores</a></li>
+  <li><a href="#summarize-sat-distribution" id="toc-summarize-sat-distribution" class="nav-link" data-scroll-target="#summarize-sat-distribution">✏️ Summarize SAT Distribution</a></li>
+  <li><a href="#plot-sat-vs-spending" id="toc-plot-sat-vs-spending" class="nav-link" data-scroll-target="#plot-sat-vs-spending">✏️ Plot SAT vs Spending</a></li>
+  <li><a href="#plot-sat-vs-salary" id="toc-plot-sat-vs-salary" class="nav-link" data-scroll-target="#plot-sat-vs-salary">✏️ Plot SAT vs Salary</a></li>
+  <li><a href="#describe-spending-trends" id="toc-describe-spending-trends" class="nav-link" data-scroll-target="#describe-spending-trends">✏️ Describe Spending Trends</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#trivariate-viz" id="toc-trivariate-viz" class="nav-link" data-scroll-target="#trivariate-viz">Trivariate Viz</a>
+  <ul class="collapse">
+<li><a href="#combine-spending-salaries" id="toc-combine-spending-salaries" class="nav-link" data-scroll-target="#combine-spending-salaries">✏️ Combine Spending &amp; Salaries</a></li>
+  <li><a href="#discretize-scale" id="toc-discretize-scale" class="nav-link" data-scroll-target="#discretize-scale">✏️ Discretize Scale</a></li>
+  <li><a href="#describe-trivariate-relationship" id="toc-describe-trivariate-relationship" class="nav-link" data-scroll-target="#describe-trivariate-relationship">✏️ Describe Trivariate Relationship</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#simpsons-paradox" id="toc-simpsons-paradox" class="nav-link" data-scroll-target="#simpsons-paradox">Simpson’s Paradox</a>
+  <ul class="collapse">
+<li><a href="#plot-sat-participation" id="toc-plot-sat-participation" class="nav-link" data-scroll-target="#plot-sat-participation">✏️ Plot SAT Participation</a></li>
+  <li><a href="#relate-sat-to-participation" id="toc-relate-sat-to-participation" class="nav-link" data-scroll-target="#relate-sat-to-participation">✏️ Relate SAT to Participation</a></li>
+  <li><a href="#add-participation-to-spending-plot" id="toc-add-participation-to-spending-plot" class="nav-link" data-scroll-target="#add-participation-to-spending-plot">✏️ Add Participation to Spending Plot</a></li>
+  <li><a href="#explain-simpsons-paradox" id="toc-explain-simpsons-paradox" class="nav-link" data-scroll-target="#explain-simpsons-paradox">✏️ Explain Simpson’s Paradox</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#heat-maps-star-plots-optional" id="toc-heat-maps-star-plots-optional" class="nav-link" data-scroll-target="#heat-maps-star-plots-optional">Heat Maps &amp; Star Plots (Optional)</a>
+  <ul class="collapse">
+<li><a href="#build-heat-maps" id="toc-build-heat-maps" class="nav-link" data-scroll-target="#build-heat-maps">✏️ Build Heat Maps</a></li>
+  <li><a href="#interpret-heat-maps" id="toc-interpret-heat-maps" class="nav-link" data-scroll-target="#interpret-heat-maps">✏️ Interpret Heat Maps</a></li>
+  <li><a href="#build-star-plot" id="toc-build-star-plot" class="nav-link" data-scroll-target="#build-star-plot">✏️ Build Star Plot</a></li>
+  <li><a href="#map-star-plots" id="toc-map-star-plots" class="nav-link" data-scroll-target="#map-star-plots">✏️ Map Star Plots</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ica/03-univariate-viz-exercises.html">In-Class Activities</a></li><li class="breadcrumb-item"><a href="../ica/05-multivariate-viz.html"><span class="chapter-title">Multivariate Viz</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Multivariate Viz</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="sat-spending" class="level2"><h2 class="anchored" data-anchor-id="sat-spending">SAT &amp; Spending</h2>
+<p>Though far from a perfect assessment of academic preparedness, SAT scores have historically been used as one measurement of a state’s education system. The <code>education</code> dataset contains various education variables for each state:</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-label="1"></a><span class="co"># Import and check out data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-label="2"></a>education <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://mac-stat.github.io/data/sat.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-label="3"></a><span class="fu">head</span>(education)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>       State expend ratio salary frac verbal math  sat  fracCat
+1    Alabama  4.405  17.2 31.144    8    491  538 1029   (0,15]
+2     Alaska  8.963  17.6 47.951   47    445  489  934 (45,100]
+3    Arizona  4.778  19.3 32.175   27    448  496  944  (15,45]
+4   Arkansas  4.459  17.1 28.934    6    482  523 1005   (0,15]
+5 California  4.992  24.0 41.078   45    417  485  902  (15,45]
+6   Colorado  5.443  18.4 34.571   29    462  518  980  (15,45]</code></pre>
+</div>
+</div>
+<p>A codebook is provided by Danny Kaplan who also made these data accessible:</p>
+<p><img src="https://mac-stat.github.io/images/112/SATcodebook.png" class="img-fluid"></p>
+<section id="plot-sat-scores" class="level3"><h3 class="anchored" data-anchor-id="plot-sat-scores">✏️ Plot SAT Scores</h3>
+<p>Construct a plot of how the average <code>sat</code> scores vary across states (<strong>HINT</strong>: you need to use the <code>sat</code> variable only).</p>
+<p>str(education) -&gt; sat - integer; state - character (categorical)</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-label="1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-label="1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> education, <span class="fu">aes</span>(<span class="at">x =</span> sat)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-label="1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> education, <span class="fu">aes</span>(<span class="at">x =</span> sat, <span class="at">group =</span> State, <span class="at">fill =</span> State)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-label="2"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> .<span class="dv">6</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="summarize-sat-distribution" class="level3"><h3 class="anchored" data-anchor-id="summarize-sat-distribution">✏️ Summarize SAT Distribution</h3>
+<p>It’s not a true bell curve; it has a skew towards 900. It seems that students most commonly score around a 900, a 940, or a 1025.</p>
+</section><section id="plot-sat-vs-spending" class="level3"><h3 class="anchored" data-anchor-id="plot-sat-vs-spending">✏️ Plot SAT vs Spending</h3>
+<p>The first question we’d like to answer is: Can the variability in <code>sat</code> scores from state to state be partially explained by how much a state spends on education, specifically its per pupil spending (<code>expend</code>) and typical teacher <code>salary</code>?</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-label="1"></a><span class="co"># Construct a plot of sat vs expend</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-label="2"></a><span class="co"># Include a "best fit linear regression model" (HINT: method = "lm")</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-label="3"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> expend)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-label="4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-label="5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="plot-sat-vs-salary" class="level3"><h3 class="anchored" data-anchor-id="plot-sat-vs-salary">✏️ Plot SAT vs Salary</h3>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-label="1"></a><span class="co"># Construct a plot of sat vs salary</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-label="2"></a><span class="co"># Include a "best fit linear regression model" (HINT: method = "lm")</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-label="3"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> salary)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-label="4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-label="5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="describe-spending-trends" class="level3"><h3 class="anchored" data-anchor-id="describe-spending-trends">✏️ Describe Spending Trends</h3>
+<p>What are the relationship trends between SAT scores and spending? Is there anything that surprises you?</p>
+<p>There’s an inverse relationship between SAT scores and spending; the more spent per student and on teachers, the lower SAT scores are on average. However, this might be because of a lack of high-scoring results.</p>
+</section></section><section id="trivariate-viz" class="level2"><h2 class="anchored" data-anchor-id="trivariate-viz">Trivariate Viz</h2>
+<section id="combine-spending-salaries" class="level3"><h3 class="anchored" data-anchor-id="combine-spending-salaries">✏️ Combine Spending &amp; Salaries</h3>
+<p>Construct <em>one</em> visualization of the relationship of <code>sat</code> with <code>salary</code> <em>and</em> <code>expend</code>. HINT: Start with just 2 variables and tweak that code to add the third variable. Try out a few things!</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-label="1"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> salary, <span class="at">color =</span> expend)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-label="2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-label="3"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="discretize-scale" class="level3"><h3 class="anchored" data-anchor-id="discretize-scale">✏️ Discretize Scale</h3>
+<p>It can be tough to distinguish color scales and size scales for quantitative variables. Another option is to <em>discretize</em> a quantitative variable, or basically cut it up into <em>categories</em>.</p>
+<p>Construct the plot below. Check out the code and think about what’s happening here. What happens if you change “2” to “3”?</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-label="1"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> salary, <span class="at">color =</span> <span class="fu">cut</span>(expend, <span class="dv">2</span>))) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-label="2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-label="3"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="describe-trivariate-relationship" class="level3"><h3 class="anchored" data-anchor-id="describe-trivariate-relationship">✏️ Describe Trivariate Relationship</h3>
+<p>Describe the trivariate relationship between <code>sat</code>, <code>salary</code>, and <code>expend</code>.</p>
+</section></section><section id="simpsons-paradox" class="level2"><h2 class="anchored" data-anchor-id="simpsons-paradox">Simpson’s Paradox</h2>
+<p>It’s strange that SAT scores <em>seem</em> to decrease with spending. But we’re leaving out an important variable from our analysis: the fraction of a state’s students that actually take the SAT. The <code>fracCat</code> variable indicates this fraction: <code>low</code> (under 15% take the SAT), <code>medium</code> (15-45% take the SAT), and <code>high</code> (at least 45% take the SAT).</p>
+<section id="plot-sat-participation" class="level3"><h3 class="anchored" data-anchor-id="plot-sat-participation">✏️ Plot SAT Participation</h3>
+<p>Build a univariate viz of <code>fracCat</code> to better understand how many states fall into each category.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-label="1"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">x =</span> fracCat, <span class="at">group =</span> State)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-label="2"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="relate-sat-to-participation" class="level3"><h3 class="anchored" data-anchor-id="relate-sat-to-participation">✏️ Relate SAT to Participation</h3>
+<p>Build 2 bivariate visualizations that demonstrate the relationship between <code>sat</code> and <code>fracCat</code>. What story does your graphic tell and why does this make contextual sense?</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-label="1"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">x =</span> fracCat, <span class="at">y =</span> sat)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-label="2"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-label="1"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">x =</span> fracCat, <span class="at">y =</span> sat)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-label="2"></a>  <span class="fu">geom_violin</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="add-participation-to-spending-plot" class="level3"><h3 class="anchored" data-anchor-id="add-participation-to-spending-plot">✏️ Add Participation to Spending Plot</h3>
+<p>Make a trivariate visualization that demonstrates the relationship of <code>sat</code> with <code>expend</code> AND <code>fracCat</code>. Highlight the differences in <code>fracCat</code> groups through color AND unique trend lines. What story does your graphic tell?<br>
+Does it still seem that SAT scores decrease as spending increases?</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-label="1"></a>education <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-label="2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> expend, <span class="at">color =</span> fracCat)) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-label="3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-label="4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05-multivariate-viz_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="explain-simpsons-paradox" class="level3"><h3 class="anchored" data-anchor-id="explain-simpsons-paradox">✏️ Explain Simpson’s Paradox</h3>
+<p>Putting all of this together, explain this example of <strong>Simpson’s Paradox</strong>. That is, why did it appear that SAT scores decrease as spending increases even though the <em>opposite</em> is true?</p>
+<p>By looking at just SAT scores and spending alone, without regard to the amount of people that actually take the test per state, the data is skewed and depicts a false inverse relationship between spending and SAT score. The more people take the test, the more normalized the results become; when a small percentage of students are taking the test, those are usually the most prepared students.</p>
+</section></section><section id="heat-maps-star-plots-optional" class="level2"><h2 class="anchored" data-anchor-id="heat-maps-star-plots-optional">Heat Maps &amp; Star Plots (Optional)</h2>
+<p>As usual, we’ve only just scratched the surface! There are lots of other data viz techniques for exploring multivariate relationships. Let’s start with a <strong>heat map</strong>.</p>
+<section id="build-heat-maps" class="level3"><h3 class="anchored" data-anchor-id="build-heat-maps">✏️ Build Heat Maps</h3>
+<p>Run the chunks below. Check out the code, but don’t worry about every little detail! NOTES:</p>
+<ul>
+<li>This is <em>not</em> part of the <code>ggplot()</code> grammar, making it a bit complicated.</li>
+<li>If you’re curious about what a line in the plot does, comment it out (<code>#</code>) and check out what happens!</li>
+<li>In the plot, for each state (row), each variable (column) is scaled to indicate whether the state has a relative high value (yellow), a relatively low value (purple), or something in between (blues/greens).</li>
+<li>You can also play with the color scheme. Type <code><a href="https://rdrr.io/r/grDevices/palettes.html">?cm.colors</a></code> in the <em>console</em> to learn about various options.</li>
+<li>We’ll improve the plot later, so don’t spend too much time trying to learn something from this plot.</li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-label="1"></a><span class="co"># Remove the "State" column and use it to label the rows</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-label="2"></a><span class="co"># Then scale the variables</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-label="3"></a>plot_data <span class="ot">&lt;-</span> education <span class="sc">|&gt;</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-label="4"></a>  <span class="fu">column_to_rownames</span>(<span class="st">"State"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-label="5"></a>  <span class="fu">data.matrix</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-label="6"></a>  <span class="fu">scale</span>()</span>
+<span id="cb14-7"><a href="#cb14-7" aria-label="7"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-label="8"></a><span class="co"># Load the gplots package needed for heatmaps</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-label="9"></a><span class="fu">library</span>(gplots)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-label="10"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-label="11"></a><span class="co"># Construct heatmap 1</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-label="12"></a><span class="fu">heatmap.2</span>(plot_data,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-label="13"></a>  <span class="at">dendrogram =</span> <span class="st">"none"</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-label="14"></a>  <span class="at">Rowv =</span> <span class="cn">NA</span>, </span>
+<span id="cb14-15"><a href="#cb14-15" aria-label="15"></a>  <span class="at">scale =</span> <span class="st">"column"</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-label="16"></a>  <span class="at">keysize =</span> <span class="fl">0.7</span>, </span>
+<span id="cb14-17"><a href="#cb14-17" aria-label="17"></a>  <span class="at">density.info =</span> <span class="st">"none"</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-label="18"></a>  <span class="at">col =</span> <span class="fu">hcl.colors</span>(<span class="dv">256</span>), </span>
+<span id="cb14-19"><a href="#cb14-19" aria-label="19"></a>  <span class="at">margins =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>),</span>
+<span id="cb14-20"><a href="#cb14-20" aria-label="20"></a>  <span class="at">colsep =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>), <span class="at">rowsep =</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>), <span class="at">sepwidth =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>),</span>
+<span id="cb14-21"><a href="#cb14-21" aria-label="21"></a>  <span class="at">sepcolor =</span> <span class="st">"white"</span>, <span class="at">trace =</span> <span class="st">"none"</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-label="22"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-label="1"></a><span class="co"># Construct heatmap 2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-label="2"></a><span class="fu">heatmap.2</span>(plot_data,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-label="3"></a>  <span class="at">dendrogram =</span> <span class="st">"none"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-label="4"></a>  <span class="at">Rowv =</span> <span class="cn">TRUE</span>,             <span class="do">### WE CHANGED THIS FROM NA TO TRUE</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-label="5"></a>  <span class="at">scale =</span> <span class="st">"column"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-label="6"></a>  <span class="at">keysize =</span> <span class="fl">0.7</span>, </span>
+<span id="cb15-7"><a href="#cb15-7" aria-label="7"></a>  <span class="at">density.info =</span> <span class="st">"none"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-label="8"></a>  <span class="at">col =</span> <span class="fu">hcl.colors</span>(<span class="dv">256</span>), </span>
+<span id="cb15-9"><a href="#cb15-9" aria-label="9"></a>  <span class="at">margins =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>),</span>
+<span id="cb15-10"><a href="#cb15-10" aria-label="10"></a>  <span class="at">colsep =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>), <span class="at">rowsep =</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>), <span class="at">sepwidth =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-label="11"></a>  <span class="at">sepcolor =</span> <span class="st">"white"</span>, <span class="at">trace =</span> <span class="st">"none"</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-label="12"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-label="1"></a><span class="co"># Construct heatmap 3</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-label="2"></a><span class="fu">heatmap.2</span>(plot_data,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-label="3"></a>  <span class="at">dendrogram =</span> <span class="st">"row"</span>,       <span class="do">### WE CHANGED THIS FROM "none" TO "row"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-label="4"></a>  <span class="at">Rowv =</span> <span class="cn">TRUE</span>,            </span>
+<span id="cb16-5"><a href="#cb16-5" aria-label="5"></a>  <span class="at">scale =</span> <span class="st">"column"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-label="6"></a>  <span class="at">keysize =</span> <span class="fl">0.7</span>, </span>
+<span id="cb16-7"><a href="#cb16-7" aria-label="7"></a>  <span class="at">density.info =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-label="8"></a>  <span class="at">col =</span> <span class="fu">hcl.colors</span>(<span class="dv">256</span>), </span>
+<span id="cb16-9"><a href="#cb16-9" aria-label="9"></a>  <span class="at">margins =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-label="10"></a>  <span class="at">colsep =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>), <span class="at">rowsep =</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>), <span class="at">sepwidth =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>),</span>
+<span id="cb16-11"><a href="#cb16-11" aria-label="11"></a>  <span class="at">sepcolor =</span> <span class="st">"white"</span>, <span class="at">trace =</span> <span class="st">"none"</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-label="12"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="interpret-heat-maps" class="level3"><h3 class="anchored" data-anchor-id="interpret-heat-maps">✏️ Interpret Heat Maps</h3>
+<p>In the final two plots, the states (rows) are rearranged by similarity with respect to these education metrics. The <em>final</em> plot includes a <strong>dendrogram</strong> which further indicates <em>clusters</em> of similar states. In short, states that have a shorter path to connection are more similar than others.</p>
+<p>Putting this all together, what insight do you gain about the education trends across U.S. states? Which states are similar? In what ways are they similar? Are there any outliers with respect to 1 or more of the education metrics?</p>
+<p>Geographically similar states tend to be grouped together, i.e.&nbsp;New York + New Jersey, or Louisiana + Mississippi.</p>
+<p>North Dakota has the highest SAT score on average but the lowest expenditure. This is probably still due to Simpson’s Paradox, since fewer students take the SAT (5%) in North Dakota.</p>
+</section><section id="build-star-plot" class="level3"><h3 class="anchored" data-anchor-id="build-star-plot">✏️ Build Star Plot</h3>
+<p>Like heat maps, star plots indicate the relative scale of each variable for each state. Thus, we can use star maps to identify similar groups of states, and unusual states!</p>
+<p>Construct and check out the star plot below. Note that each state has a “pie”, with each segment corresponding to a different variable. The larger a segment, the larger that variable’s value is in that state. For example:</p>
+<ul>
+<li>Check out Minnesota. How does Minnesota’s education metrics compare to those in other states? What metrics are relatively high? Relatively low?</li>
+</ul>
+<p>Only 9% of students take the SAT in Minnesota. The spending is average, and the SAT average is #3 in the nation.</p>
+<ul>
+<li>What states appear to be similar? Do these observations agree with those that you gained from the heat map?</li>
+</ul>
+<p>North Dakota and South Dakota are the most similar. Illinois, Michigan, and Wisconsin appear more similar in the heat map according to the dendrogram, but it’s close.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-label="1"></a><span class="fu">stars</span>(plot_data,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-label="2"></a>  <span class="at">flip.labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-label="3"></a>  <span class="at">key.loc =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="fl">1.5</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-label="4"></a>  <span class="at">cex =</span> <span class="dv">1</span>, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-label="5"></a>  <span class="at">draw.segments =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-label="6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="map-star-plots" class="level3"><h3 class="anchored" data-anchor-id="map-star-plots">✏️ Map Star Plots</h3>
+<p>Finally, let’s plot the state stars by <em>geographic</em> location! What new insight do you gain here?!</p>
+<p>High expenditure in the northeast and west regions; low expenditure in the Midwest and South.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-label="1"></a><span class="fu">stars</span>(plot_data,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-label="2"></a>  <span class="at">flip.labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-label="3"></a>  <span class="at">locations =</span> <span class="fu">data.matrix</span>(<span class="fu">as.data.frame</span>(state.center)),  <span class="co"># added external data to arrange by geo location</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-label="4"></a>  <span class="at">key.loc =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">110</span>, <span class="dv">28</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-label="5"></a>  <span class="at">cex =</span> <span class="dv">1</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-label="6"></a>  <span class="at">draw.segments =</span> <span class="cn">TRUE</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-label="7"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+
+
+<!-- -->
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+      <a href="../ica/04-bivariate-viz.html" class="pagination-link" aria-label="Bivariate Viz - Exercises">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Bivariate Viz - Exercises</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../extra/extra-sample1.html" class="pagination-link" aria-label="Extra Sample 1">
+        <span class="nav-page-text"><span class="chapter-title">Extra Sample 1</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-label="1"></a><span class="co">---</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-label="2"></a><span class="an">title:</span><span class="co"> "Multivariate Viz"</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-label="3"></a><span class="co"># generated by activities/create_ica_files.R</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-label="4"></a><span class="co">---</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-label="5"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-label="6"></a><span class="fu">## SAT &amp; Spending</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-label="7"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-label="8"></a>Though far from a perfect assessment of academic preparedness, SAT scores have historically been used as one measurement of a state's education system. The <span class="in">`education`</span> dataset contains various education variables for each state:</span>
+<span id="cb19-9"><a href="#cb19-9" aria-label="9"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-label="10"></a><span class="in">```{r}</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-label="11"></a><span class="co"># Import and check out data</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-label="12"></a>education <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://mac-stat.github.io/data/sat.csv"</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-label="13"></a><span class="fu">head</span>(education)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-label="14"></a><span class="in">```</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-label="15"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-label="16"></a>A codebook is provided by Danny Kaplan who also made these data accessible:</span>
+<span id="cb19-19"><a href="#cb19-19" aria-label="17"></a></span>
+<span id="cb19-20"><a href="#cb19-20" aria-label="18"></a><span class="al">![](https://mac-stat.github.io/images/112/SATcodebook.png)</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-label="19"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-label="20"></a></span>
+<span id="cb19-23"><a href="#cb19-23" aria-label="21"></a><span class="fu">### ✏️ Plot SAT Scores</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-label="22"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-label="23"></a>Construct a plot of how the average <span class="in">`sat`</span> scores vary across states (**HINT**: you need to use the <span class="in">`sat`</span> variable only).</span>
+<span id="cb19-26"><a href="#cb19-26" aria-label="24"></a></span>
+<span id="cb19-27"><a href="#cb19-27" aria-label="25"></a>str(education) -&gt; sat - integer; state - character (categorical)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-label="26"></a></span>
+<span id="cb19-31"><a href="#cb19-31" aria-label="27"></a><span class="in">```{r}</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-label="28"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb19-33"><a href="#cb19-33" aria-label="29"></a><span class="in">```</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-label="30"></a></span>
+<span id="cb19-35"><a href="#cb19-35" aria-label="31"></a></span>
+<span id="cb19-38"><a href="#cb19-38" aria-label="32"></a><span class="in">```{r}</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-label="33"></a><span class="fu">ggplot</span>(<span class="at">data =</span> education, <span class="fu">aes</span>(<span class="at">x =</span> sat)) <span class="sc">+</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-label="34"></a>  <span class="fu">geom_histogram</span>()</span>
+<span id="cb19-41"><a href="#cb19-41" aria-label="35"></a><span class="fu">ggplot</span>(<span class="at">data =</span> education, <span class="fu">aes</span>(<span class="at">x =</span> sat, <span class="at">group =</span> State, <span class="at">fill =</span> State)) <span class="sc">+</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-label="36"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> .<span class="dv">6</span>) </span>
+<span id="cb19-43"><a href="#cb19-43" aria-label="37"></a><span class="in">```</span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-label="38"></a></span>
+<span id="cb19-45"><a href="#cb19-45" aria-label="39"></a><span class="fu">### ✏️ Summarize SAT Distribution</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-label="40"></a></span>
+<span id="cb19-47"><a href="#cb19-47" aria-label="41"></a>It's not a true bell curve; it has a skew towards 900. It seems that students most commonly score around a 900, a 940, or a 1025.</span>
+<span id="cb19-48"><a href="#cb19-48" aria-label="42"></a></span>
+<span id="cb19-49"><a href="#cb19-49" aria-label="43"></a><span class="fu">### ✏️ Plot SAT vs Spending</span></span>
+<span id="cb19-50"><a href="#cb19-50" aria-label="44"></a></span>
+<span id="cb19-51"><a href="#cb19-51" aria-label="45"></a>The first question we'd like to answer is: Can the variability in <span class="in">`sat`</span> scores from state to state be partially explained by how much a state spends on education, specifically its per pupil spending (<span class="in">`expend`</span>) and typical teacher <span class="in">`salary`</span>?</span>
+<span id="cb19-52"><a href="#cb19-52" aria-label="46"></a></span>
+<span id="cb19-55"><a href="#cb19-55" aria-label="47"></a><span class="in">```{r}</span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-label="48"></a><span class="co"># Construct a plot of sat vs expend</span></span>
+<span id="cb19-57"><a href="#cb19-57" aria-label="49"></a><span class="co"># Include a "best fit linear regression model" (HINT: method = "lm")</span></span>
+<span id="cb19-58"><a href="#cb19-58" aria-label="50"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> expend)) <span class="sc">+</span></span>
+<span id="cb19-59"><a href="#cb19-59" aria-label="51"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-60"><a href="#cb19-60" aria-label="52"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span>
+<span id="cb19-61"><a href="#cb19-61" aria-label="53"></a></span>
+<span id="cb19-62"><a href="#cb19-62" aria-label="54"></a><span class="in">```</span></span>
+<span id="cb19-63"><a href="#cb19-63" aria-label="55"></a></span>
+<span id="cb19-64"><a href="#cb19-64" aria-label="56"></a></span>
+<span id="cb19-65"><a href="#cb19-65" aria-label="57"></a><span class="fu">### ✏️ Plot SAT vs Salary</span></span>
+<span id="cb19-66"><a href="#cb19-66" aria-label="58"></a></span>
+<span id="cb19-69"><a href="#cb19-69" aria-label="59"></a><span class="in">```{r}</span></span>
+<span id="cb19-70"><a href="#cb19-70" aria-label="60"></a><span class="co"># Construct a plot of sat vs salary</span></span>
+<span id="cb19-71"><a href="#cb19-71" aria-label="61"></a><span class="co"># Include a "best fit linear regression model" (HINT: method = "lm")</span></span>
+<span id="cb19-72"><a href="#cb19-72" aria-label="62"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> salary)) <span class="sc">+</span></span>
+<span id="cb19-73"><a href="#cb19-73" aria-label="63"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-74"><a href="#cb19-74" aria-label="64"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span>
+<span id="cb19-75"><a href="#cb19-75" aria-label="65"></a><span class="in">```</span></span>
+<span id="cb19-76"><a href="#cb19-76" aria-label="66"></a></span>
+<span id="cb19-77"><a href="#cb19-77" aria-label="67"></a><span class="fu">### ✏️ Describe Spending Trends</span></span>
+<span id="cb19-78"><a href="#cb19-78" aria-label="68"></a></span>
+<span id="cb19-79"><a href="#cb19-79" aria-label="69"></a>What are the relationship trends between SAT scores and spending? Is there anything that surprises you?</span>
+<span id="cb19-80"><a href="#cb19-80" aria-label="70"></a></span>
+<span id="cb19-81"><a href="#cb19-81" aria-label="71"></a>There's an inverse relationship between SAT scores and spending; the more spent per student and on teachers, the lower SAT scores are on average. However, this might be because of a lack of high-scoring results. </span>
+<span id="cb19-82"><a href="#cb19-82" aria-label="72"></a></span>
+<span id="cb19-83"><a href="#cb19-83" aria-label="73"></a></span>
+<span id="cb19-84"><a href="#cb19-84" aria-label="74"></a><span class="fu">## Trivariate Viz</span></span>
+<span id="cb19-85"><a href="#cb19-85" aria-label="75"></a></span>
+<span id="cb19-86"><a href="#cb19-86" aria-label="76"></a><span class="fu">### ✏️ Combine Spending &amp; Salaries</span></span>
+<span id="cb19-87"><a href="#cb19-87" aria-label="77"></a></span>
+<span id="cb19-88"><a href="#cb19-88" aria-label="78"></a>Construct *one* visualization of the relationship of `sat` with `salary` *and* <span class="in">`expend`</span>. HINT: Start with just 2 variables and tweak that code to add the third variable. Try out a few things!</span>
+<span id="cb19-89"><a href="#cb19-89" aria-label="79"></a></span>
+<span id="cb19-92"><a href="#cb19-92" aria-label="80"></a><span class="in">```{r}</span></span>
+<span id="cb19-93"><a href="#cb19-93" aria-label="81"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> salary, <span class="at">color =</span> expend)) <span class="sc">+</span></span>
+<span id="cb19-94"><a href="#cb19-94" aria-label="82"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-95"><a href="#cb19-95" aria-label="83"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span>
+<span id="cb19-96"><a href="#cb19-96" aria-label="84"></a><span class="in">```</span></span>
+<span id="cb19-97"><a href="#cb19-97" aria-label="85"></a></span>
+<span id="cb19-98"><a href="#cb19-98" aria-label="86"></a></span>
+<span id="cb19-99"><a href="#cb19-99" aria-label="87"></a></span>
+<span id="cb19-100"><a href="#cb19-100" aria-label="88"></a><span class="fu">### ✏️ Discretize Scale</span></span>
+<span id="cb19-101"><a href="#cb19-101" aria-label="89"></a></span>
+<span id="cb19-102"><a href="#cb19-102" aria-label="90"></a>It can be tough to distinguish color scales and size scales for quantitative variables. Another option is to *discretize* a quantitative variable, or basically cut it up into *categories*.</span>
+<span id="cb19-103"><a href="#cb19-103" aria-label="91"></a></span>
+<span id="cb19-104"><a href="#cb19-104" aria-label="92"></a>Construct the plot below. Check out the code and think about what's happening here. What happens if you change "2" to "3"?</span>
+<span id="cb19-105"><a href="#cb19-105" aria-label="93"></a></span>
+<span id="cb19-108"><a href="#cb19-108" aria-label="94"></a><span class="in">```{r}</span></span>
+<span id="cb19-109"><a href="#cb19-109" aria-label="95"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> salary, <span class="at">color =</span> <span class="fu">cut</span>(expend, <span class="dv">2</span>))) <span class="sc">+</span> </span>
+<span id="cb19-110"><a href="#cb19-110" aria-label="96"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb19-111"><a href="#cb19-111" aria-label="97"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>)</span>
+<span id="cb19-112"><a href="#cb19-112" aria-label="98"></a><span class="in">```</span></span>
+<span id="cb19-113"><a href="#cb19-113" aria-label="99"></a></span>
+<span id="cb19-114"><a href="#cb19-114" aria-label="100"></a><span class="fu">### ✏️ Describe Trivariate Relationship</span></span>
+<span id="cb19-115"><a href="#cb19-115" aria-label="101"></a></span>
+<span id="cb19-116"><a href="#cb19-116" aria-label="102"></a>Describe the trivariate relationship between <span class="in">`sat`</span>, <span class="in">`salary`</span>, and <span class="in">`expend`</span>.</span>
+<span id="cb19-117"><a href="#cb19-117" aria-label="103"></a></span>
+<span id="cb19-118"><a href="#cb19-118" aria-label="104"></a></span>
+<span id="cb19-119"><a href="#cb19-119" aria-label="105"></a><span class="fu">## Simpson's Paradox</span></span>
+<span id="cb19-120"><a href="#cb19-120" aria-label="106"></a></span>
+<span id="cb19-121"><a href="#cb19-121" aria-label="107"></a>It's strange that SAT scores *seem* to decrease with spending. But we're leaving out an important variable from our analysis: the fraction of a state's students that actually take the SAT. The <span class="in">`fracCat`</span> variable indicates this fraction: <span class="in">`low`</span> (under 15% take the SAT), <span class="in">`medium`</span> (15-45% take the SAT), and <span class="in">`high`</span> (at least 45% take the SAT).</span>
+<span id="cb19-122"><a href="#cb19-122" aria-label="108"></a></span>
+<span id="cb19-123"><a href="#cb19-123" aria-label="109"></a><span class="fu">### ✏️ Plot SAT Participation</span></span>
+<span id="cb19-124"><a href="#cb19-124" aria-label="110"></a></span>
+<span id="cb19-125"><a href="#cb19-125" aria-label="111"></a>Build a univariate viz of <span class="in">`fracCat`</span> to better understand how many states fall into each category.</span>
+<span id="cb19-126"><a href="#cb19-126" aria-label="112"></a></span>
+<span id="cb19-129"><a href="#cb19-129" aria-label="113"></a><span class="in">```{r}</span></span>
+<span id="cb19-130"><a href="#cb19-130" aria-label="114"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">x =</span> fracCat, <span class="at">group =</span> State)) <span class="sc">+</span></span>
+<span id="cb19-131"><a href="#cb19-131" aria-label="115"></a>  <span class="fu">geom_bar</span>()</span>
+<span id="cb19-132"><a href="#cb19-132" aria-label="116"></a></span>
+<span id="cb19-133"><a href="#cb19-133" aria-label="117"></a><span class="in">```</span></span>
+<span id="cb19-134"><a href="#cb19-134" aria-label="118"></a></span>
+<span id="cb19-135"><a href="#cb19-135" aria-label="119"></a><span class="fu">### ✏️ Relate SAT to Participation</span></span>
+<span id="cb19-136"><a href="#cb19-136" aria-label="120"></a></span>
+<span id="cb19-137"><a href="#cb19-137" aria-label="121"></a>Build 2 bivariate visualizations that demonstrate the relationship between <span class="in">`sat`</span> and <span class="in">`fracCat`</span>. What story does your graphic tell and why does this make contextual sense?</span>
+<span id="cb19-138"><a href="#cb19-138" aria-label="122"></a></span>
+<span id="cb19-141"><a href="#cb19-141" aria-label="123"></a><span class="in">```{r}</span></span>
+<span id="cb19-142"><a href="#cb19-142" aria-label="124"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">x =</span> fracCat, <span class="at">y =</span> sat)) <span class="sc">+</span></span>
+<span id="cb19-143"><a href="#cb19-143" aria-label="125"></a>  <span class="fu">geom_boxplot</span>()</span>
+<span id="cb19-144"><a href="#cb19-144" aria-label="126"></a></span>
+<span id="cb19-145"><a href="#cb19-145" aria-label="127"></a><span class="fu">ggplot</span>(education, <span class="fu">aes</span>(<span class="at">x =</span> fracCat, <span class="at">y =</span> sat)) <span class="sc">+</span></span>
+<span id="cb19-146"><a href="#cb19-146" aria-label="128"></a>  <span class="fu">geom_violin</span>()</span>
+<span id="cb19-147"><a href="#cb19-147" aria-label="129"></a><span class="in">```</span></span>
+<span id="cb19-148"><a href="#cb19-148" aria-label="130"></a></span>
+<span id="cb19-149"><a href="#cb19-149" aria-label="131"></a><span class="fu">### ✏️ Add Participation to Spending Plot</span></span>
+<span id="cb19-150"><a href="#cb19-150" aria-label="132"></a></span>
+<span id="cb19-151"><a href="#cb19-151" aria-label="133"></a>Make a trivariate visualization that demonstrates the relationship of <span class="in">`sat`</span> with <span class="in">`expend`</span> AND <span class="in">`fracCat`</span>. Highlight the differences in <span class="in">`fracCat`</span> groups through color AND unique trend lines. What story does your graphic tell?\</span>
+<span id="cb19-152"><a href="#cb19-152" aria-label="134"></a>Does it still seem that SAT scores decrease as spending increases?</span>
+<span id="cb19-153"><a href="#cb19-153" aria-label="135"></a></span>
+<span id="cb19-156"><a href="#cb19-156" aria-label="136"></a><span class="in">```{r}</span></span>
+<span id="cb19-157"><a href="#cb19-157" aria-label="137"></a>education <span class="sc">|&gt;</span></span>
+<span id="cb19-158"><a href="#cb19-158" aria-label="138"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> sat, <span class="at">x =</span> expend, <span class="at">color =</span> fracCat)) <span class="sc">+</span> </span>
+<span id="cb19-159"><a href="#cb19-159" aria-label="139"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb19-160"><a href="#cb19-160" aria-label="140"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span>
+<span id="cb19-161"><a href="#cb19-161" aria-label="141"></a><span class="in">```</span></span>
+<span id="cb19-162"><a href="#cb19-162" aria-label="142"></a></span>
+<span id="cb19-163"><a href="#cb19-163" aria-label="143"></a><span class="fu">### ✏️ Explain Simpson's Paradox</span></span>
+<span id="cb19-164"><a href="#cb19-164" aria-label="144"></a></span>
+<span id="cb19-165"><a href="#cb19-165" aria-label="145"></a>Putting all of this together, explain this example of **Simpson’s Paradox**. That is, why did it appear that SAT scores decrease as spending increases even though the *opposite* is true?</span>
+<span id="cb19-166"><a href="#cb19-166" aria-label="146"></a></span>
+<span id="cb19-167"><a href="#cb19-167" aria-label="147"></a>By looking at just SAT scores and spending alone, without regard to the amount of people that actually take the test per state, the data is skewed and depicts a false inverse relationship between spending and SAT score. The more people take the test, the more normalized the results become; when a small percentage of students are taking the test, those are usually the most prepared students.</span>
+<span id="cb19-168"><a href="#cb19-168" aria-label="148"></a></span>
+<span id="cb19-169"><a href="#cb19-169" aria-label="149"></a><span class="fu">## Heat Maps &amp; Star Plots (Optional)</span></span>
+<span id="cb19-170"><a href="#cb19-170" aria-label="150"></a></span>
+<span id="cb19-171"><a href="#cb19-171" aria-label="151"></a>As usual, we've only just scratched the surface! There are lots of other data viz techniques for exploring multivariate relationships. Let's start with a **heat map**.</span>
+<span id="cb19-172"><a href="#cb19-172" aria-label="152"></a></span>
+<span id="cb19-173"><a href="#cb19-173" aria-label="153"></a></span>
+<span id="cb19-174"><a href="#cb19-174" aria-label="154"></a><span class="fu">### ✏️ Build Heat Maps</span></span>
+<span id="cb19-175"><a href="#cb19-175" aria-label="155"></a></span>
+<span id="cb19-176"><a href="#cb19-176" aria-label="156"></a>Run the chunks below. Check out the code, but don't worry about every little detail! NOTES:</span>
+<span id="cb19-177"><a href="#cb19-177" aria-label="157"></a></span>
+<span id="cb19-178"><a href="#cb19-178" aria-label="158"></a><span class="ss">-   </span>This is *not* part of the <span class="in">`ggplot()`</span> grammar, making it a bit complicated.</span>
+<span id="cb19-179"><a href="#cb19-179" aria-label="159"></a><span class="ss">-   </span>If you're curious about what a line in the plot does, comment it out (<span class="in">`#`</span>) and check out what happens!</span>
+<span id="cb19-180"><a href="#cb19-180" aria-label="160"></a><span class="ss">-   </span>In the plot, for each state (row), each variable (column) is scaled to indicate whether the state has a relative high value (yellow), a relatively low value (purple), or something in between (blues/greens).</span>
+<span id="cb19-181"><a href="#cb19-181" aria-label="161"></a><span class="ss">-   </span>You can also play with the color scheme. Type <span class="in">`?cm.colors`</span> in the *console* to learn about various options.</span>
+<span id="cb19-182"><a href="#cb19-182" aria-label="162"></a><span class="ss">-   </span>We'll improve the plot later, so don't spend too much time trying to learn something from this plot.</span>
+<span id="cb19-183"><a href="#cb19-183" aria-label="163"></a></span>
+<span id="cb19-186"><a href="#cb19-186" aria-label="164"></a><span class="in">```{r}</span></span>
+<span id="cb19-187"><a href="#cb19-187" aria-label="165"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb19-188"><a href="#cb19-188" aria-label="166"></a><span class="co">#| fig-height: 15</span></span>
+<span id="cb19-189"><a href="#cb19-189" aria-label="167"></a><span class="co">#| eval: false</span></span>
+<span id="cb19-190"><a href="#cb19-190" aria-label="168"></a></span>
+<span id="cb19-191"><a href="#cb19-191" aria-label="169"></a><span class="co"># Remove the "State" column and use it to label the rows</span></span>
+<span id="cb19-192"><a href="#cb19-192" aria-label="170"></a><span class="co"># Then scale the variables</span></span>
+<span id="cb19-193"><a href="#cb19-193" aria-label="171"></a>plot_data <span class="ot">&lt;-</span> education <span class="sc">|&gt;</span> </span>
+<span id="cb19-194"><a href="#cb19-194" aria-label="172"></a>  <span class="fu">column_to_rownames</span>(<span class="st">"State"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb19-195"><a href="#cb19-195" aria-label="173"></a>  <span class="fu">data.matrix</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb19-196"><a href="#cb19-196" aria-label="174"></a>  <span class="fu">scale</span>()</span>
+<span id="cb19-197"><a href="#cb19-197" aria-label="175"></a></span>
+<span id="cb19-198"><a href="#cb19-198" aria-label="176"></a><span class="co"># Load the gplots package needed for heatmaps</span></span>
+<span id="cb19-199"><a href="#cb19-199" aria-label="177"></a><span class="fu">library</span>(gplots)</span>
+<span id="cb19-200"><a href="#cb19-200" aria-label="178"></a></span>
+<span id="cb19-201"><a href="#cb19-201" aria-label="179"></a><span class="co"># Construct heatmap 1</span></span>
+<span id="cb19-202"><a href="#cb19-202" aria-label="180"></a><span class="fu">heatmap.2</span>(plot_data,</span>
+<span id="cb19-203"><a href="#cb19-203" aria-label="181"></a>  <span class="at">dendrogram =</span> <span class="st">"none"</span>,</span>
+<span id="cb19-204"><a href="#cb19-204" aria-label="182"></a>  <span class="at">Rowv =</span> <span class="cn">NA</span>, </span>
+<span id="cb19-205"><a href="#cb19-205" aria-label="183"></a>  <span class="at">scale =</span> <span class="st">"column"</span>,</span>
+<span id="cb19-206"><a href="#cb19-206" aria-label="184"></a>  <span class="at">keysize =</span> <span class="fl">0.7</span>, </span>
+<span id="cb19-207"><a href="#cb19-207" aria-label="185"></a>  <span class="at">density.info =</span> <span class="st">"none"</span>,</span>
+<span id="cb19-208"><a href="#cb19-208" aria-label="186"></a>  <span class="at">col =</span> <span class="fu">hcl.colors</span>(<span class="dv">256</span>), </span>
+<span id="cb19-209"><a href="#cb19-209" aria-label="187"></a>  <span class="at">margins =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>),</span>
+<span id="cb19-210"><a href="#cb19-210" aria-label="188"></a>  <span class="at">colsep =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>), <span class="at">rowsep =</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>), <span class="at">sepwidth =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>),</span>
+<span id="cb19-211"><a href="#cb19-211" aria-label="189"></a>  <span class="at">sepcolor =</span> <span class="st">"white"</span>, <span class="at">trace =</span> <span class="st">"none"</span></span>
+<span id="cb19-212"><a href="#cb19-212" aria-label="190"></a>)</span>
+<span id="cb19-213"><a href="#cb19-213" aria-label="191"></a><span class="in">```</span></span>
+<span id="cb19-214"><a href="#cb19-214" aria-label="192"></a></span>
+<span id="cb19-217"><a href="#cb19-217" aria-label="193"></a><span class="in">```{r}</span></span>
+<span id="cb19-218"><a href="#cb19-218" aria-label="194"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb19-219"><a href="#cb19-219" aria-label="195"></a><span class="co">#| fig-height: 15</span></span>
+<span id="cb19-220"><a href="#cb19-220" aria-label="196"></a><span class="co">#| eval: false</span></span>
+<span id="cb19-221"><a href="#cb19-221" aria-label="197"></a></span>
+<span id="cb19-222"><a href="#cb19-222" aria-label="198"></a><span class="co"># Construct heatmap 2</span></span>
+<span id="cb19-223"><a href="#cb19-223" aria-label="199"></a><span class="fu">heatmap.2</span>(plot_data,</span>
+<span id="cb19-224"><a href="#cb19-224" aria-label="200"></a>  <span class="at">dendrogram =</span> <span class="st">"none"</span>,</span>
+<span id="cb19-225"><a href="#cb19-225" aria-label="201"></a>  <span class="at">Rowv =</span> <span class="cn">TRUE</span>,             <span class="do">### WE CHANGED THIS FROM NA TO TRUE</span></span>
+<span id="cb19-226"><a href="#cb19-226" aria-label="202"></a>  <span class="at">scale =</span> <span class="st">"column"</span>,</span>
+<span id="cb19-227"><a href="#cb19-227" aria-label="203"></a>  <span class="at">keysize =</span> <span class="fl">0.7</span>, </span>
+<span id="cb19-228"><a href="#cb19-228" aria-label="204"></a>  <span class="at">density.info =</span> <span class="st">"none"</span>,</span>
+<span id="cb19-229"><a href="#cb19-229" aria-label="205"></a>  <span class="at">col =</span> <span class="fu">hcl.colors</span>(<span class="dv">256</span>), </span>
+<span id="cb19-230"><a href="#cb19-230" aria-label="206"></a>  <span class="at">margins =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>),</span>
+<span id="cb19-231"><a href="#cb19-231" aria-label="207"></a>  <span class="at">colsep =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>), <span class="at">rowsep =</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>), <span class="at">sepwidth =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>),</span>
+<span id="cb19-232"><a href="#cb19-232" aria-label="208"></a>  <span class="at">sepcolor =</span> <span class="st">"white"</span>, <span class="at">trace =</span> <span class="st">"none"</span></span>
+<span id="cb19-233"><a href="#cb19-233" aria-label="209"></a>)</span>
+<span id="cb19-234"><a href="#cb19-234" aria-label="210"></a><span class="in">```</span></span>
+<span id="cb19-235"><a href="#cb19-235" aria-label="211"></a></span>
+<span id="cb19-238"><a href="#cb19-238" aria-label="212"></a><span class="in">```{r}</span></span>
+<span id="cb19-239"><a href="#cb19-239" aria-label="213"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb19-240"><a href="#cb19-240" aria-label="214"></a><span class="co">#| fig-height: 15</span></span>
+<span id="cb19-241"><a href="#cb19-241" aria-label="215"></a><span class="co">#| eval: false</span></span>
+<span id="cb19-242"><a href="#cb19-242" aria-label="216"></a></span>
+<span id="cb19-243"><a href="#cb19-243" aria-label="217"></a><span class="co"># Construct heatmap 3</span></span>
+<span id="cb19-244"><a href="#cb19-244" aria-label="218"></a><span class="fu">heatmap.2</span>(plot_data,</span>
+<span id="cb19-245"><a href="#cb19-245" aria-label="219"></a>  <span class="at">dendrogram =</span> <span class="st">"row"</span>,       <span class="do">### WE CHANGED THIS FROM "none" TO "row"</span></span>
+<span id="cb19-246"><a href="#cb19-246" aria-label="220"></a>  <span class="at">Rowv =</span> <span class="cn">TRUE</span>,            </span>
+<span id="cb19-247"><a href="#cb19-247" aria-label="221"></a>  <span class="at">scale =</span> <span class="st">"column"</span>,</span>
+<span id="cb19-248"><a href="#cb19-248" aria-label="222"></a>  <span class="at">keysize =</span> <span class="fl">0.7</span>, </span>
+<span id="cb19-249"><a href="#cb19-249" aria-label="223"></a>  <span class="at">density.info =</span> <span class="st">"none"</span>,</span>
+<span id="cb19-250"><a href="#cb19-250" aria-label="224"></a>  <span class="at">col =</span> <span class="fu">hcl.colors</span>(<span class="dv">256</span>), </span>
+<span id="cb19-251"><a href="#cb19-251" aria-label="225"></a>  <span class="at">margins =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>),</span>
+<span id="cb19-252"><a href="#cb19-252" aria-label="226"></a>  <span class="at">colsep =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>), <span class="at">rowsep =</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>), <span class="at">sepwidth =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>),</span>
+<span id="cb19-253"><a href="#cb19-253" aria-label="227"></a>  <span class="at">sepcolor =</span> <span class="st">"white"</span>, <span class="at">trace =</span> <span class="st">"none"</span></span>
+<span id="cb19-254"><a href="#cb19-254" aria-label="228"></a>)</span>
+<span id="cb19-255"><a href="#cb19-255" aria-label="229"></a><span class="in">```</span></span>
+<span id="cb19-256"><a href="#cb19-256" aria-label="230"></a></span>
+<span id="cb19-257"><a href="#cb19-257" aria-label="231"></a><span class="fu">### ✏️ Interpret Heat Maps</span></span>
+<span id="cb19-258"><a href="#cb19-258" aria-label="232"></a></span>
+<span id="cb19-259"><a href="#cb19-259" aria-label="233"></a>In the final two plots, the states (rows) are rearranged by similarity with respect to these education metrics. The *final* plot includes a **dendrogram** which further indicates *clusters* of similar states. In short, states that have a shorter path to connection are more similar than others.</span>
+<span id="cb19-260"><a href="#cb19-260" aria-label="234"></a></span>
+<span id="cb19-261"><a href="#cb19-261" aria-label="235"></a>Putting this all together, what insight do you gain about the education trends across U.S. states? Which states are similar? In what ways are they similar? Are there any outliers with respect to 1 or more of the education metrics?</span>
+<span id="cb19-262"><a href="#cb19-262" aria-label="236"></a></span>
+<span id="cb19-263"><a href="#cb19-263" aria-label="237"></a>Geographically similar states tend to be grouped together, i.e. New York + New Jersey, or Louisiana + Mississippi.</span>
+<span id="cb19-264"><a href="#cb19-264" aria-label="238"></a></span>
+<span id="cb19-265"><a href="#cb19-265" aria-label="239"></a>North Dakota has the highest SAT score on average but the lowest expenditure. This is probably still due to Simpson's Paradox, since fewer students take the SAT (5%) in North Dakota. </span>
+<span id="cb19-266"><a href="#cb19-266" aria-label="240"></a></span>
+<span id="cb19-267"><a href="#cb19-267" aria-label="241"></a><span class="fu">### ✏️ Build Star Plot</span></span>
+<span id="cb19-268"><a href="#cb19-268" aria-label="242"></a></span>
+<span id="cb19-269"><a href="#cb19-269" aria-label="243"></a>Like heat maps, star plots indicate the relative scale of each variable for each state. Thus, we can use star maps to identify similar groups of states, and unusual states!</span>
+<span id="cb19-270"><a href="#cb19-270" aria-label="244"></a></span>
+<span id="cb19-271"><a href="#cb19-271" aria-label="245"></a>Construct and check out the star plot below. Note that each state has a "pie", with each segment corresponding to a different variable. The larger a segment, the larger that variable's value is in that state. For example:</span>
+<span id="cb19-272"><a href="#cb19-272" aria-label="246"></a></span>
+<span id="cb19-273"><a href="#cb19-273" aria-label="247"></a><span class="ss">-   </span>Check out Minnesota. How does Minnesota's education metrics compare to those in other states? What metrics are relatively high? Relatively low?</span>
+<span id="cb19-274"><a href="#cb19-274" aria-label="248"></a></span>
+<span id="cb19-275"><a href="#cb19-275" aria-label="249"></a>Only 9% of students take the SAT in Minnesota. The spending is average, and the SAT average is #3 in the nation. </span>
+<span id="cb19-276"><a href="#cb19-276" aria-label="250"></a></span>
+<span id="cb19-277"><a href="#cb19-277" aria-label="251"></a><span class="ss">-   </span>What states appear to be similar? Do these observations agree with those that you gained from the heat map?</span>
+<span id="cb19-278"><a href="#cb19-278" aria-label="252"></a></span>
+<span id="cb19-279"><a href="#cb19-279" aria-label="253"></a>North Dakota and South Dakota are the most similar. Illinois, Michigan, and Wisconsin appear more similar in the heat map according to the dendrogram, but it's close.</span>
+<span id="cb19-280"><a href="#cb19-280" aria-label="254"></a></span>
+<span id="cb19-283"><a href="#cb19-283" aria-label="255"></a><span class="in">```{r}</span></span>
+<span id="cb19-284"><a href="#cb19-284" aria-label="256"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb19-285"><a href="#cb19-285" aria-label="257"></a><span class="co">#| fig-height: 20</span></span>
+<span id="cb19-286"><a href="#cb19-286" aria-label="258"></a><span class="co">#| eval: false</span></span>
+<span id="cb19-287"><a href="#cb19-287" aria-label="259"></a></span>
+<span id="cb19-288"><a href="#cb19-288" aria-label="260"></a><span class="fu">stars</span>(plot_data,</span>
+<span id="cb19-289"><a href="#cb19-289" aria-label="261"></a>  <span class="at">flip.labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-290"><a href="#cb19-290" aria-label="262"></a>  <span class="at">key.loc =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="fl">1.5</span>),</span>
+<span id="cb19-291"><a href="#cb19-291" aria-label="263"></a>  <span class="at">cex =</span> <span class="dv">1</span>, </span>
+<span id="cb19-292"><a href="#cb19-292" aria-label="264"></a>  <span class="at">draw.segments =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-293"><a href="#cb19-293" aria-label="265"></a>)</span>
+<span id="cb19-294"><a href="#cb19-294" aria-label="266"></a><span class="in">```</span></span>
+<span id="cb19-295"><a href="#cb19-295" aria-label="267"></a></span>
+<span id="cb19-296"><a href="#cb19-296" aria-label="268"></a><span class="fu">### ✏️ Map Star Plots</span></span>
+<span id="cb19-297"><a href="#cb19-297" aria-label="269"></a></span>
+<span id="cb19-298"><a href="#cb19-298" aria-label="270"></a>Finally, let's plot the state stars by *geographic* location! What new insight do you gain here?!</span>
+<span id="cb19-299"><a href="#cb19-299" aria-label="271"></a></span>
+<span id="cb19-300"><a href="#cb19-300" aria-label="272"></a>High expenditure in the northeast and west regions; low expenditure in the Midwest and South.</span>
+<span id="cb19-301"><a href="#cb19-301" aria-label="273"></a></span>
+<span id="cb19-304"><a href="#cb19-304" aria-label="274"></a><span class="in">```{r}</span></span>
+<span id="cb19-305"><a href="#cb19-305" aria-label="275"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb19-306"><a href="#cb19-306" aria-label="276"></a><span class="co">#| fig-height: 7</span></span>
+<span id="cb19-307"><a href="#cb19-307" aria-label="277"></a><span class="co">#| eval: false</span></span>
+<span id="cb19-308"><a href="#cb19-308" aria-label="278"></a></span>
+<span id="cb19-309"><a href="#cb19-309" aria-label="279"></a><span class="fu">stars</span>(plot_data,</span>
+<span id="cb19-310"><a href="#cb19-310" aria-label="280"></a>  <span class="at">flip.labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-311"><a href="#cb19-311" aria-label="281"></a>  <span class="at">locations =</span> <span class="fu">data.matrix</span>(<span class="fu">as.data.frame</span>(state.center)),  <span class="co"># added external data to arrange by geo location</span></span>
+<span id="cb19-312"><a href="#cb19-312" aria-label="282"></a>  <span class="at">key.loc =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">110</span>, <span class="dv">28</span>),</span>
+<span id="cb19-313"><a href="#cb19-313" aria-label="283"></a>  <span class="at">cex =</span> <span class="dv">1</span>, </span>
+<span id="cb19-314"><a href="#cb19-314" aria-label="284"></a>  <span class="at">draw.segments =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-315"><a href="#cb19-315" aria-label="285"></a>)</span>
+<span id="cb19-316"><a href="#cb19-316" aria-label="286"></a><span class="in">```</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
