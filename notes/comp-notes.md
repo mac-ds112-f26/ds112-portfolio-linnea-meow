@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Pro Tips](#pro-tips)
-- [Basics of Data Viz] (#basis-of-data-viz)
+- [Basics of Data Viz](#basics-of-data-viz)
 - [Choosing a Plot](#choosing-a-plot)
 - [The Pipe Operator](#the-pipe-operator)
 - [Scales, Legends and Accessibility](#scales-legends-and-accessibility)
@@ -21,7 +21,9 @@
 > University of Michigan has been a reliable mirror for me.
 
 ---
+
 ## Basics of Data Viz
+
 | Term | Meaning |
 |------|---------|
 | Frame | variables that define the axes |
