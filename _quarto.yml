@@ -82,6 +82,7 @@ book:
       - ica/03-univariate-viz-exercises.qmd
       - ica/04-bivariate-viz.qmd
       - ica/05-multivariate-viz.qmd
+      - ica/06-effective-viz.qmd
 
     - part: "Extras"
       chapters:
