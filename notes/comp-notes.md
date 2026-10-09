@@ -6,7 +6,7 @@
 - [Basics of Data Viz](#basics-of-data-viz)
 - [Choosing a Plot](#choosing-a-plot)
 - [The Pipe Operator](#the-pipe-operator)
-- [Scales, Legends and Accessibility](#scales-legends-and-accessibility)
+- [Legends and Accessibility](#legends-and-accessibility)
 - [Wrangling Verbs](#wrangling-verbs)
 
 ---
@@ -150,7 +150,7 @@ Temporary objects can be useful for cleaning data, but once complete it is likel
 
 </details>
 
-## Scales, Legends and Accessibility
+## Legends and Accessibility
 
 ### Continuous vs. discrete
 
@@ -167,8 +167,13 @@ labs(color = "penguin species")  # legend title for species color codes
 
 ### Alt text
 
-Add alt text so screen readers can describe your plots for the visually impaired.
+Add alt text so screen readers can describe your plots for the visually impaired:
 
+```r
+
+#| fig-alt: "text here"
+
+```
 ---
 
 ## Wrangling Verbs
